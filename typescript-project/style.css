@@ -21,3 +21,40 @@ body {
     display: flex;
     flex-direction: column;
 }
+
+.items {
+    display: flex;
+    justify-content: center;
+}
+
+.item {
+    border: 1px solid #ccc;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    margin: 2rem;
+    max-width: 200px;
+    cursor: pointer;
+}
+
+.item:hover, .item.selected {
+    transform: scale(1.1);
+}
+
+.item.selected {
+    box-shadow: 0 4px 8px 0 rgb(0 0 0 / 10%), 0 10px 13px 0 rgb(0 0 0 / 11%);
+}
+
+.img {
+    flex: 1;
+    width: 100%;
+}
+
+.title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    height: 60px;
+    padding: 0.5rem 0.25rem;
+}
