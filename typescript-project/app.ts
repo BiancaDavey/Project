@@ -37,11 +37,11 @@ class Row {
     stones: Stone[]
     element: HTMLDivElement
 
-    constructor(id: number, stoneNumber: number) {
+    constructor(id: number, stoneNumber: number, takenStones: number[] = []) {
         this.id = id
         this.stones = Array.from({length: stoneNumber}).map((_, index) => {
             const stoneId = stoneNumber * id + index
-            return new Stone(stoneId)
+            return new Stone(stoneId, takenStones.includes(stoneId))
         })
         this.element = document.createElement('div')
         this.element.classList.add('row')
@@ -58,12 +58,12 @@ class StoneMap {
     selectedStones: number[]  = []
     element: HTMLDivElement
 
-    constructor(rowNumber: number, stoneNumberPerRow: number){
+    constructor(rowNumber: number, stoneNumberPerRow: number, takenStones: number[] = []){
         this.rows = Array.from({ length: rowNumber }).map((_, index) => {
-            return new Row(index, stoneNumberPerRow)
+            return new Row(index, stoneNumberPerRow, takenStones)
         })
         this.element = document.createElement('div')
-        this.element.classList.add('map')
+        this.element.classList.add('stone-map')
         this.element.append(...this.rows.map((row) => row.element))
         this.element.addEventListener('click', () => {
             this.getSelectedStonesId()
@@ -117,3 +117,81 @@ async function fetchItems() {
 }
 
 fetchItems()
+
+class Class1 {
+    items: Item[] = []
+    stoneMap: StoneMap | null = null
+    class2Container: HTMLDivElement
+    itemsContainer: HTMLDivElement
+    itemElements: HTMLDivElement[] = []
+
+    constructor() {
+        this.itemsContainer = document.createElement('div')
+        this.itemsContainer.id = 'items'
+        this.itemsContainer.classList.add('items')
+        this.class2Container = document.createElement('div')
+        this.class2Container.id = 'class2'
+        this.class2Container.classList.add('class2')
+        const class2aElement = document.createElement('div')
+        class2aElement.classList.add('class2a')
+        class2aElement.innerText = 'Class2a'
+        this.class2Container.appendChild(class2aElement)
+        document.getElementById('class1')?.append(this.itemsContainer, this.class2Container)
+    }
+
+    async fetchItems(){
+        this.items = await http<Item[]>('http://localhost:8000/items')
+        if (this.items.length){
+            this.renderItems()
+            // Selects first item by default.
+            this.selectItem(0)
+        }
+    }
+
+    renderItems() {
+        // Clearing out existing items.
+        this.itemElements = []
+        this.itemsContainer.innerHTML = ''
+        this.items.forEach((item, index) => {
+            const itemElement = document.createElement('div')
+            itemElement.id = item.id.toString()
+            itemElement.classList.add('item')
+            // Clicking item selects the item.
+            itemElement.addEventListener('click', () => {
+                if (!itemElement.classList.contains('selected')) {
+                    this.selectItem(index)
+                }
+            })
+            const imgElement = document.createElement('img')
+            imgElement.classList.add('img')
+            imgElement.src = item.img
+            const titleElement = document.createElement('div')
+            titleElement.classList.add('title')
+            titleElement.innerText = item.title
+            itemElement.append(imgElement, titleElement)
+            this.itemElements.push(itemElement)
+            this.itemsContainer.appendChild(itemElement)
+        })
+    }
+
+    selectItem(selectedIndex: number) {
+        this.itemElements.forEach((element, index) =>
+            selectedIndex === index
+                ? element.classList.add ('selected')
+                : element.classList.remove('selected')
+        )
+        const {
+            class2: { rowNumber, stoneNumberPerRow, takenStones },
+        } = this.items[selectedIndex]
+        // Render new stone map.
+        if (this.stoneMap){
+            this.class2Container.lastChild?.remove()
+        }
+        this.stoneMap = new StoneMap(rowNumber, stoneNumberPerRow, takenStones)
+        this.class2Container.append(this.stoneMap.element)
+    }
+}
+
+// Initialise app with Class1 object.
+const class1 = new Class1()
+class1.fetchItems()
