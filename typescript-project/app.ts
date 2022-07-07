@@ -85,3 +85,35 @@ class StoneMap {
 
 const stoneMap = new StoneMap(8, 10);
 document.getElementById('class2')?.appendChild(stoneMap.element)
+
+type Class2 = {
+    rowNumber: number
+    stoneNumberPerRow: number
+    takenStones?: number[]
+}
+
+type Item = {
+    id: number
+    title: string
+    img: string
+    class2: Class2
+}
+
+async function http<T>(request: RequestInfo): Promise<T> {
+    const response = await fetch(request)
+    if (!response.ok){
+        throw new Error (response.statusText)
+    }
+    const headers = response.headers
+    const data = headers.get('content-type')?.includes('json')
+        ? await response.json()
+        : {}
+    return data
+}
+
+async function fetchItems() {
+    const items = await http<Item[]>('http://localhost:8000/items')
+    console.log(items)
+}
+
+fetchItems()
