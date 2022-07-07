@@ -22,7 +22,7 @@ const items = [
         class2: {
             rowNumber: 10,
             stoneNumberPerRow: 12,
-            takenStones: [3, 4,33, 34],
+            takenStones: [3, 4, 33, 34],
         },
     },
     {
