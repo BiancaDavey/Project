@@ -71,10 +71,13 @@ class StoneMap {
     }
 
     getSelectedStonesId(){
+        /*
         this.selectedStones = this.rows.reduce<number[]>((total, row) => {
             total = [... total, ...row.selectedStonesId]
             return total
         }, [])
+        */
+       this.selectedStones = this.rows.map(row => row.selectedStonesId).flat()
         console.log(`selected stones: ${this.selectedStones.join(',')}`)
     }
 
