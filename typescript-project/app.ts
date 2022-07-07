@@ -132,10 +132,10 @@ class Class1 {
         this.class2Container = document.createElement('div')
         this.class2Container.id = 'class2'
         this.class2Container.classList.add('class2')
-        const class2aElement = document.createElement('div')
-        class2aElement.classList.add('class2a')
-        class2aElement.innerText = 'Class2a'
-        this.class2Container.appendChild(class2aElement)
+        const boardAreaUpperElement = document.createElement('div')
+        boardAreaUpperElement.classList.add('boardAreaUpper')
+        boardAreaUpperElement.innerText = 'BoardAreaUpper'
+        this.class2Container.appendChild(boardAreaUpperElement)
         document.getElementById('class1')?.append(this.itemsContainer, this.class2Container)
     }
 
@@ -192,6 +192,6 @@ class Class1 {
     }
 }
 
-// Initialise app with Class1 object.
+// Initialise app with class1 object.
 const class1 = new Class1()
 class1.fetchItems()

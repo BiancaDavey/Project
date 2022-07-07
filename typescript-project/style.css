@@ -68,7 +68,7 @@ body {
     perspective: 500px;
 }
 
-.class2a {
+.boardAreaUpper {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -83,7 +83,7 @@ body {
     font-weight: 900;
 }
 
-.stonemap {
+.stone-map {
     display: flex;
     flex-direction: column;
     row-gap: 0.5rem;

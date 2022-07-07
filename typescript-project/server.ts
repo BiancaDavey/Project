@@ -8,7 +8,7 @@ app.use(cors())
 const items = [
     {
         id: 1,
-        title: 'Title 1',
+        title: 'Title 0',
         img: 'https://cdn.eventcinemas.com.au/cdn/resources/movies/15020/images/largeposter.jpg',
         class2: {
             rowNumber: 8,
