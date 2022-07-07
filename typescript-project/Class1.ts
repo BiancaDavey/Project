@@ -38,7 +38,7 @@ export default class Class1 {
         this.class2Container.classList.add('class2')
         const boardAreaUpperElement = document.createElement('div')
         boardAreaUpperElement.classList.add('boardAreaUpper')
-        boardAreaUpperElement.innerText = 'BoardAreaUpper'
+        boardAreaUpperElement.innerText = 'Screen'
         this.class2Container.appendChild(boardAreaUpperElement)
         document.getElementById('class1')?.append(this.itemsContainer, this.class2Container)
     }
