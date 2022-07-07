@@ -15,6 +15,20 @@ class Stone {
         this.element = document.createElement('div')
         this.element.classList.add ('stone')
         this.element.classList.add(this.status.toLowerCase())
+        this.element.addEventListener('click', () => {
+            this.handleClick()
+        })
+    }
+
+    handleClick() {
+        if (this.status === STATUS.TAKEN) return
+        this.element.classList.remove(this.status.toLowerCase())
+        this.status = this.status === STATUS.AVAILABLE ? STATUS.SELECTED : STATUS.AVAILABLE
+        this.element.classList.add(this.status.toLowerCase())
+    }
+
+    get isSelected() {
+        return this.status === STATUS.SELECTED
     }
 }
 
@@ -33,6 +47,10 @@ class Row {
         this.element.classList.add('row')
         this.element.append(...this.stones.map((stone) => stone.element))
     }
+
+    get selectedStonesId() {
+        return this.stones.filter((stone) => stone.isSelected).map((stone) => stone.id)
+    }
 }
 
 class StoneMap {
@@ -47,7 +65,19 @@ class StoneMap {
         this.element = document.createElement('div')
         this.element.classList.add('map')
         this.element.append(...this.rows.map((row) => row.element))
+        this.element.addEventListener('click', () => {
+            this.getSelectedStonesId()
+        })
     }
+
+    getSelectedStonesId(){
+        this.selectedStones = this.rows.reduce<number[]>((total, row) => {
+            total = [... total, ...row.selectedStonesId]
+            return total
+        }, [])
+        console.log(`selected stones: ${this.selectedStones.join(',')}`)
+    }
+
 }
 
 const stoneMap = new StoneMap(8, 10);
