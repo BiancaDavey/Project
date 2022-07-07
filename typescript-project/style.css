@@ -83,7 +83,7 @@ body {
     font-weight: 900;
 }
 
-.class2b {
+.stonemap {
     display: flex;
     flex-direction: column;
     row-gap: 0.5rem;
@@ -94,7 +94,7 @@ body {
     column-gap: 0.5rem;
 }
 
-.dot {
+.stone {
     height: 2rem;
     width: 2rem;
     border: 1px solid #ccc;
@@ -104,20 +104,20 @@ body {
     cursor: pointer;
 }
 
-.dot.taken {
+.stone.taken {
     background-color: rgba(0, 0, 0, 0.8);
     cursor: not-allowed;
 }
 
-.dot.selected {
+.stone.selected {
     background-color: #16437E;
 }
 
-.dot.available {
+.stone.available {
     background-color: #fff;
 }
 
-.dot.available:hover {
+.stone.available:hover {
     background-color: #16437E;
     opacity: 0.5;
 }
